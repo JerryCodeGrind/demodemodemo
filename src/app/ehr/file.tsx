@@ -74,10 +74,17 @@ export const FileUpload: React.FC<{ onChange?: (files: File[]) => void }> = ({ o
     formData.append("file", fileToProcess);
 
     try {
-      const response = await fetch(API_CONFIG.getEndpoint('PROCESS_FILE'), {
+      const endpoint = API_CONFIG.getEndpoint('PROCESS_FILE');
+      console.log('🔍 Trying to fetch:', endpoint);
+      console.log('🔍 Environment:', process.env.NODE_ENV);
+      console.log('🔍 Base URL:', API_CONFIG.BASE_URL);
+      
+      const response = await fetch(endpoint, {
         method: "POST",
         body: formData,
       });
+      
+      console.log('✅ Response received:', response.status);
 
       if (!response.ok) {
         let errorMsg = `HTTP error! status: ${response.status}`;
@@ -95,7 +102,9 @@ export const FileUpload: React.FC<{ onChange?: (files: File[]) => void }> = ({ o
       setEhrSummary(result.response);
       setFiles([]); // Clear file list after successful processing
     } catch (e: any) {
-      console.error("Upload failed:", e);
+      console.error("❌ Upload failed:", e);
+      console.error("❌ Error type:", e.constructor.name);
+      console.error("❌ Error message:", e.message);
       setError(e.message || "Failed to process file. Please try again.");
     } finally {
       setProcessing(false);
