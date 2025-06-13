@@ -10,14 +10,8 @@ const getApiUrl = (): string => {
     return process.env.NEXT_PUBLIC_API_URL;
   }
   
-  // Fallback logic based on environment
-  if (process.env.NODE_ENV === 'production') {
-    // In production, you'll replace this with your deployed backend URL
-    return 'https://web-production-f5ba7.up.railway.app'; // Replace with your actual deployed URL
-  }
-  
-  // Development fallback
-  return 'http://127.0.0.1:5001';
+  // Always use Railway URL for now (since we don't have local backend)
+  return 'https://web-production-f5ba7.up.railway.app';
 };
 
 // Define the API configuration type
@@ -45,10 +39,18 @@ export const API_CONFIG: ApiConfig = {
   async fetchWithConfig(endpoint: string, options: RequestInit = {}): Promise<Response> {
     const url = endpoint.startsWith('http') ? endpoint : `${API_CONFIG.BASE_URL}${endpoint}`;
     
+    // Don't set Content-Type for FormData - let the browser handle it
+    const headers: Record<string, string> = {};
+    
+    // Only set Content-Type for JSON requests
+    if (options.body && typeof options.body === 'string') {
+      headers['Content-Type'] = 'application/json';
+    }
+    
     const response = await fetch(url, {
       ...options,
       headers: {
-        'Content-Type': 'application/json',
+        ...headers,
         ...options.headers,
       },
     });
