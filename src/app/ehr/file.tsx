@@ -78,6 +78,8 @@ export const FileUpload: React.FC<{ onChange?: (files: File[]) => void }> = ({ o
       console.log('🔍 Trying to fetch:', endpoint);
       console.log('🔍 Environment:', process.env.NODE_ENV);
       console.log('🔍 Base URL:', API_CONFIG.BASE_URL);
+      console.log('🔍 Environment:', process.env.NODE_ENV);
+      console.log('🔍 Base URL:', API_CONFIG.BASE_URL);
       
       const response = await fetch(endpoint, {
         method: "POST",
