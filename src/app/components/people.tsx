@@ -21,10 +21,10 @@ export default function People() {
       </motion.h2>
 
       {/* Content Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto items-center">
+      <div className="grid grid-cols-1 gap-12 max-w-3xl mx-auto items-center justify-items-center">
         {/* Text */}
         <motion.div
-          className="space-y-6 text-lg leading-relaxed text-gray-300"
+          className="space-y-6 text-lg leading-relaxed text-gray-300 text-center"
           variants={fadeinRight}
           transition={defaultTransition}
         >
@@ -34,21 +34,6 @@ export default function People() {
           <p>
             Whether it's designing seamless user interfaces or solving complex engineering challenges, our mission is to deliver thoughtful, innovative solutions that drive impact.
           </p>
-        </motion.div>
-
-        {/* Image */}
-        <motion.div
-          className="w-full h-64 md:h-80 rounded-2xl overflow-hidden bg-gray-800 flex items-center justify-center"
-          variants={fadeInUp}
-          transition={defaultTransition}
-        >
-          <Image
-            src="/team-placeholder.png" // Replace with your image
-            alt="Our team"
-            width={500}
-            height={500}
-            className="object-cover w-full h-full"
-          />
         </motion.div>
       </div>
     </motion.section>
