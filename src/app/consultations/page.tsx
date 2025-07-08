@@ -4,24 +4,16 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../chat/Auth';
 import { chatService, Chat, SOAPNote, Referral } from '../chat/chatService';
-import { IconMessage, IconSearch, IconArrowLeft, IconPlus, IconFileText, IconUsers, IconLoader } from '@tabler/icons-react';
+import { IconMessage, IconSearch, IconArrowLeft, IconFileText, IconUsers, IconLoader } from '@tabler/icons-react';
 import { cn } from '@/app/lib/utils';
 
-const EmptyState = ({ title, message, actionText, onAction }: {
+const EmptyState = ({ title, message }: {
   title: string;
   message: string;
-  actionText?: string;
-  onAction?: () => void;
 }) => (
   <div className="text-center py-12 px-6 flex flex-col items-center justify-center h-full text-gray-400">
     <h3 className="text-lg text-gray-300 mb-2 font-header">{title}</h3>
     <p className="text-sm text-gray-500 mb-6 max-w-xs">{message}</p>
-    {actionText && onAction && (
-      <button onClick={onAction} className="px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors flex items-center">
-        <IconPlus size={18} className="mr-2" />
-        {actionText}
-      </button>
-    )}
   </div>
 );
 
@@ -192,10 +184,7 @@ export default function ConsultationsPage() {
           Back
         </button>
         <h1 className="text-xl text-gray-100 font-header">My Consultations</h1>
-        <button onClick={() => router.push('/book-consultation')} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
-          <IconPlus size={18} className="mr-2" />
-          Book New
-        </button>
+        <div></div>
       </div>
 
       <div className="flex-1 flex gap-4 p-4 overflow-hidden">
@@ -240,8 +229,6 @@ export default function ConsultationsPage() {
             <EmptyState 
               title="No Consultation Selected" 
               message="Select a consultation to view details."
-              actionText="Book New Consultation"
-              onAction={() => router.push('/book-consultation')}
             />
           ) : (
             <>
