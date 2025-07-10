@@ -5,12 +5,19 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+// Define the system prompt that sets the behavior of the AI
+const systemPrompt = {
+  role: 'system',
+  content: 'You are a helpful, knowledgeable assistant. Provide accurate, concise, and relevant information. Be friendly and conversational in your responses.'
+};
+
 export async function POST(req: Request) {
   try {
     const { message, history = [] } = await req.json();
 
     // Prepare messages with system prompt and history
     const messages = [
+      systemPrompt,
       ...history,
       { role: 'user', content: message }
     ];
