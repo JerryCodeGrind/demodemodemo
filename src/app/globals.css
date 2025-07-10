@@ -69,25 +69,17 @@ body {
     font-family: 'header', sans-serif;
   }
 
-  /* Custom scrollbar for the chat area */
+  /* Apply no-scrollbar class to chat-container to hide scrollbar */
+  .chat-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+
   .chat-container::-webkit-scrollbar {
-    width: 2px;
+    display: none;             /* Chrome, Safari, Opera */
   }
 
-  .chat-container::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  .chat-container::-webkit-scrollbar-thumb {
-    background: #d1d5db;
-    border-radius: 2px;
-  }
-
-  .chat-container::-webkit-scrollbar-thumb:hover {
-    background: #9ca3af;
-  }
-
-  /* Dark mode scrollbar */
+  /* Dark mode scrollbar - these won't be visible anymore */
   .dark .chat-container::-webkit-scrollbar-thumb {
     background: #4b5563;
   }
