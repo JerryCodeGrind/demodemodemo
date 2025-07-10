@@ -5,21 +5,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
-// System prompt to guide AI behavior
-const SYSTEM_PROMPT = 
-  "You are a helpful, empathetic, and knowledgeable AI doctor. " +
-  "You are capable of providing basic medical advice, triaging symptoms, " +
-  "and suggesting when someone should see a real doctor. " +
-  "You do not diagnose or prescribe. Always recommend consulting a human doctor " +
-  "for serious or persistent issues. Respond in a professional and clear tone.";
-
 export async function POST(req: Request) {
   try {
     const { message, history = [] } = await req.json();
 
     // Prepare messages with system prompt and history
     const messages = [
-      { role: 'system', content: SYSTEM_PROMPT },
       ...history,
       { role: 'user', content: message }
     ];
@@ -59,4 +50,4 @@ export async function POST(req: Request) {
       headers: { 'Content-Type': 'application/json' }
     });
   }
-}
+} //placeholder
